@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
 import connectDB from "./config/db";
 import {
   errorResponserHandler,
@@ -8,6 +9,7 @@ import {
 
 // Routes
 import userRoutes from "./routes/userRoutes";
+import postRoutes from "./routes/postRoutes";
 
 // dotenv configuration
 dotenv.config();
@@ -24,8 +26,12 @@ app.get("/", (req, resp) => {
   resp.send("Server is running...");
 });
 
-// Second Url
+// api url
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
+
+// static assests
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 // Error Handler
 app.use(invalidPathHandler);
