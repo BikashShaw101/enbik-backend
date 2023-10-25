@@ -17,7 +17,7 @@ const uploadPicture = multer({
   },
   fileFilter: function (req, file, callback) {
     let extension = path.extname(file.originalname);
-    if ((extension !== ".jpg" && extension !== ".png" && extension !== ".jpeg")) {
+    if ((extension !== ".jpg" && extension !== ".png" && extension !== ".jpeg" && extension !== ".webp")) {
       callback(new Error("Only images are allowed"));
     }
     callback(null, true);
