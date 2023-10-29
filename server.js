@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import connectDB from "./config/db";
@@ -11,6 +12,7 @@ import {
 import userRoutes from "./routes/userRoutes";
 import postRoutes from "./routes/postRoutes";
 import commentRoutes from "./routes/commentRoutes";
+
 
 // dotenv configuration
 dotenv.config();
@@ -31,6 +33,7 @@ app.get("/", (req, resp) => {
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
+app.use(cors());
 
 // static assests
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

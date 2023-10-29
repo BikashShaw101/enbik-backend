@@ -68,7 +68,7 @@ const updatePost = async (req, resp, next) => {
           let filename;
           filename = post.photo;
           post.photo = "";
-          await updatedUser.save();
+          await post.save();
           fileRemover(filename);
           handleUpdatePostData(req.body.document);
         }
@@ -156,7 +156,16 @@ const getAllPosts = async (req, res, next) => {
     const total = await Post.find(where).countDocuments();
     const pages = Math.ceil(total / pageSize);
 
+    res.header({
+      "x-filter": filter,
+      "x-totalcount": JSON.stringify(total),
+      "x-currentpage": JSON.stringify(page),
+      "x-pagesize": JSON.stringify(pageSize),
+      "x-totalpagecount": JSON.stringify(pages),
+    });
+
     if (page > pages) {
+      res.json([]);
       const error = new Error("No Page Found..");
       next(error);
     }
@@ -173,14 +182,6 @@ const getAllPosts = async (req, res, next) => {
       .sort({
         updatedAt: "desc",
       });
-
-    res.header({
-      "x-filter": filter,
-      "x-totalcount": JSON.stringify(total),
-      "x-currentpage": JSON.stringify(page),
-      "x-pagesize": JSON.stringify(pageSize),
-      "x-totalpagecount": JSON.stringify(pages),
-    });
 
     return res.json(result);
   } catch (error) {
