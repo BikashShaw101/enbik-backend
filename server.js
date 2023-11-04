@@ -33,8 +33,7 @@ app.get("/", (req, resp) => {
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
-app.use(cors(
-));
+app.use(cors());
 
 // static assests
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
