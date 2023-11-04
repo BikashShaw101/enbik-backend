@@ -36,7 +36,7 @@ app.use("/api/comments", commentRoutes);
 app.use(cors(
   {
     origin:["https://deploy-mern-lwhq.vercel.app"],
-    method:["GET","POST"],
+    methods:["GET","POST"],
     credentials:true
   }
 ));
