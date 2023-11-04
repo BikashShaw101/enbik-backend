@@ -33,13 +33,7 @@ app.get("/", (req, resp) => {
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
-app.use(cors(
-  {
-    origin:["https://deploy-mern-lwhq.vercel.app"],
-    methods:["GET","POST"],
-    credentials:true
-  }
-));
+app.use(cors());
 
 // static assests
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
