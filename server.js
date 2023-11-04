@@ -34,7 +34,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 app.use(cors(
-  { credentials: true, origin: "https://enbikblog.netlify.app/" }
 ));
 
 // static assests
